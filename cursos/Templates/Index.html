@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+
+<body>
+    <h1>Listado de Cursos</h1>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{formulario_cursos.as_p}}
+        <button type="submit">Guardar curso</button>
+    </form>
+
+    {% for message in messages %}
+    <p>{{message}}</p>
+    {% endfor %}
+
+    {% for curso in cursos %}
+    <p>Código: {{curso.codigo}}</p>
+    <p>Nombre: {{curso.nombre}}</p>
+    <p>Créditos: {{curso.creditos}}</p>
+    <a href="{% url 'eliminar' curso.id %}"><button>Eliminar</button></a>
+    <a href="{% url 'editar' curso.id %}"><button>Editar</button></a>
+    {% endfor %}
+
+</body>
+
+</html>
+{% endblock %}
